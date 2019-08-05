@@ -24,7 +24,17 @@ screen = pygame.display.set_mode(res)
 #
 
 
-TheGrid = np.array([[0 for i in range(CellGridSize[0])] for j in range(CellGridSize[1])])
+MvmtGrid = np.array([[0 for i in range(CellGridSize[0])] for j in range(CellGridSize[1])])
+SnekGrid = np.array([['n' for i in range(CellGridSize[0])] for j in range(CellGridSize[1])])
+#in this, the letter 's' will refer to the snake body while 'h' will refer to the head and 'n' will mean "nothing"
+
+bodylet = 's'
+hedlet = 'h'
+nolet = 'n'
+
+SnekGrid[0][0] = bodylet
+SnekGrid[1][0] = bodylet
+SnekGrid[2][0] = hedlet
 
 running = True
 
@@ -33,8 +43,16 @@ targetfps = 60
 
 clock = pygame.time.Clock()
 snakelocs = []
+#starting snake length is 3 blocks
 
 while (running == True):
     print("hi")
+    colcount = 0
+    for col in MvmtGrid:
+        rowcount = 0
+        for row in MvmtGrid:
+            print("hi")
+
+
     clock.tick(targetfps)
     pygame.display.flip()
