@@ -19,9 +19,11 @@ screen = pygame.display.set_mode(res)
 #will rewrite array with the direction the snek is going
 #       0           1       2           3           4
 #   placeholder    up       down        left        right
+#       null dir    w/up arrow  s/downarr   a/Larr  d/RArr
 #
 #
-#
+
+
 
 
 MvmtGrid = np.array([[0 for i in range(CellGridSize[0])] for j in range(CellGridSize[1])])
@@ -38,7 +40,18 @@ SnekGrid[2][0] = hedlet
 
 running = True
 
+def Switch(input, l):
+    returnlist = []
+    for val in l:
+        if input == val:
+            returnlist.append(0)
+        else:
+            returnlist.append(1)
+    return returnlist
+
+
 #color of snake will be white on black background
+#head should be a lightish blue or something
 targetfps = 60
 
 clock = pygame.time.Clock()
@@ -51,7 +64,26 @@ while (running == True):
     for col in MvmtGrid:
         rowcount = 0
         for row in MvmtGrid:
-            print("hi")
+            print("")
+    for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+
+                if event.key == pygame.K_w or event.key == pygame.K_UP:
+                    #do thing   
+                    print("hi") 
+                elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                    #left thing
+                    print("hi")
+                elif event.key == pygame.K_s or event.key == pygame.K_RIGHT:
+                    #right thing
+                    print("hi")
+                elif event.key == pygame.K_d or event.key == pygame.K_DOWN:
+                    #down thing
+                    print("hi")
+                else:
+                    #just ignore that key
+                    print("hi")
+            
 
 
     clock.tick(targetfps)
