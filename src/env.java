@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class env {
 
-    public ArrayList GenApple(int x, int y) {
+    public ArrayList GetApple(int x, int y) {
 
         ArrayList a = new ArrayList();
 
