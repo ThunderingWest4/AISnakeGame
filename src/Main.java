@@ -1,8 +1,13 @@
 import java.util.ArrayList;
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.Applet;
 
 public class Main {
 
-    public void keyPressed(KeyEvent evt);
+    public void keyPressed(KeyEvent evt) {
+        System.out.println(evt);
+    }
 
     public static void main(String[] args) {
         //launch(args);
