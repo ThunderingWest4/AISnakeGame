@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javax.swing.*;
 
 public class Snake extends Application{
 
