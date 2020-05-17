@@ -27,9 +27,11 @@ Grid = [[("s" if((i == 0) and (j == 0)) else "e" if ((i == Goal[0]) and (j == Go
 
 
 Start = (0, 0)
-Startcol = (0, 0, 255)
+Blue = (0, 0, 255)
+HeadCol = ((8*16), (8*16), 255)
 GoalCol = (255, 215, 0)
 Other = (0, 255, 0)
+Red = (255, 0, 0)
 run = True
 #only one max val bc its a square
 
@@ -56,10 +58,10 @@ while(run == True):
         v = 0
         for o in col:
             #if(o == "s"):
-            #    pygame.draw.rect(screen, Startcol, pygame.Rect((c*21), (v*21), 20, 20))
+            #    pygame.draw.rect(screen, Blue, pygame.Rect((c*21), (v*21), 20, 20))
                 #head = (c, v)
             if(o == "e"):
-                pygame.draw.rect(screen, GoalCol, pygame.Rect((c*(MAX+1)), (v*(MAX+1)), MAX, MAX))
+                pygame.draw.rect(screen, Red, pygame.Rect((c*(MAX+1)), (v*(MAX+1)), MAX, MAX))
             else:
                 pygame.draw.rect(screen, Other, pygame.Rect((c*(MAX+1)), (v*(MAX+1)), MAX, MAX))
 
@@ -69,7 +71,8 @@ while(run == True):
 
         c += 1
     for g in snekBody:
-        pygame.draw.rect(screen, Startcol, pygame.Rect((g[0]*(MAX+1)), (g[1]*(MAX+1)), MAX, MAX))
+        pygame.draw.rect(screen, Blue, pygame.Rect((g[0]*(MAX+1)), (g[1]*(MAX+1)), MAX, MAX))
+    pygame.draw.rect(screen, HeadCol, pygame.Rect((snekBody[len(snekBody)-1][0]*(MAX+1)), (snekBody[len(snekBody)-1][1]*(MAX+1)), MAX, MAX))
 
     if(not (head == goal)):
         #basically if we're not at the goal
@@ -108,7 +111,8 @@ while(run == True):
 
     else:
         print("Apple Reached")
-        Goal = GoalInit()
+        while(Goal in snekBody):
+            Goal = GoalInit()
         #Grid = start()
         #begin()
         a = [[("s" if((f == head[0]) and (j == head[1])) else "e" if ((f == Goal[0]) and (j == Goal[1])) else "n") for f in range(MAX)] for j in range(MAX)]
