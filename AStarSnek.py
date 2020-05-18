@@ -6,9 +6,8 @@ import time
 pygame.init()
 pygame.font.init()
 
-res = (960, 960)
-
-MAX = 30
+MAX = 20
+res = (MAX**2 + 2*MAX, MAX**2 + 2*MAX)
 Goal = ()
 def GoalInit():
     return (random.randint(0, (MAX - 1)), random.randint(0, (MAX - 1)))
@@ -86,15 +85,24 @@ while(run == True):
         if((head[0] - 1) >= 0): adjoining.append((head[0] - 1, head[1])) #the block to the *left*
         HDict = {}
         for obj in adjoining:
-            HDict[obj] = (abs(obj[0] - goal[0]) + abs(obj[1] - goal[1]))
+            if(obj in snekBody):
+                adjoining.remove(obj)
+            else: 
+                HDict[obj] = (abs(obj[0] - goal[0])**2 + abs(obj[1] - goal[1])**2) 
+                #Heuristics
+                HDict[obj] += abs(Start[0]-obj[0]) + abs(Start[1]-obj[1])
+                #Cost/Dist from Initial pt
+
         #sort Heuristic Array by val
         #thanks @ https://www.saltycrane.com/blog/2007/09/how-to-sort-python-dictionary-by-keys/
         getH = 0
-        SmallestH = ()
+        SmallestH = head
         for key, value in sorted(HDict.items(), key=lambda item: item[1]):
             print("%s: %s" % (key, value))
             if(getH == 0):
                 #SmallestH = HDict[i]
+                SmallestH = key
+            if(goal == key):
                 SmallestH = key
             getH += 1
 
@@ -111,8 +119,13 @@ while(run == True):
 
     else:
         print("Apple Reached")
-        while(Goal in snekBody):
+        goalFound = False
+        while(not goalFound):
             Goal = GoalInit()
+            if(not (Goal in snekBody)):
+                goalFound = True
+
+        Start = snekBody[len(snekBody)-1]
         #Grid = start()
         #begin()
         a = [[("s" if((f == head[0]) and (j == head[1])) else "e" if ((f == Goal[0]) and (j == Goal[1])) else "n") for f in range(MAX)] for j in range(MAX)]
