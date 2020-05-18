@@ -1,3 +1,6 @@
 .dist
 .vscode
 .out
+build
+AStarSnek.spec
+__pycache__
